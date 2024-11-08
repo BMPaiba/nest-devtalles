@@ -5,17 +5,23 @@ import { PokemonModule } from './pokemon/pokemon.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CommonModule } from './common/common.module';
 import { SeedModule } from './seed/seed.module';
-import { AxiosAdapter } from './common/adapters/axios.adapter';
+import { ConfigModule } from '@nestjs/config';
+import { EnvConfiguration } from './config/env.config';
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-    rootPath: join(__dirname,'..','public'),
+    ConfigModule.forRoot({
+      load: [EnvConfiguration],
     }),
-    MongooseModule.forRoot('mongodb://localhost:27017/pokedex'),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+    }),
+    MongooseModule.forRoot(process.env.MONGODB, {
+      dbName: 'pokedex',
+    }),
     PokemonModule,
     CommonModule,
     SeedModule,
-    ], 
+  ],
 })
 export class AppModule {}
