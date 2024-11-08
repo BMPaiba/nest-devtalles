@@ -1,0 +1,10 @@
+hmtl, body {
+    padding: 20px;
+    background-color: #333;
+}
+
+h1 {
+    text-align: center;
+    font-size: 20px;
+    color: white;
+}
