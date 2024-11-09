@@ -3,10 +3,12 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { ProductImages } from './product-images.entity';
 
-@Entity()
+@Entity({name: 'products'})
 export class Product {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -34,7 +36,9 @@ export class Product {
 
   @Column('text', { array: true, default: [] })
   tags:string[]
-  //images
+
+  @OneToMany(() => ProductImages, (productImage) => productImage.product, {cascade: true , eager: true})
+  images?: ProductImages[];
 
   @BeforeInsert()
   ckeckSlotInsert() {
