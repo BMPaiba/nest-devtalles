@@ -14,6 +14,9 @@ import { SeedModule } from './seed/seed.module';
       database: process.env.DB_NAME,
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
+      ssl: {
+        rejectUnauthorized: true, 
+      },
       autoLoadEntities: true,
       synchronize: true
     }),

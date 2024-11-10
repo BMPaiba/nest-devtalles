@@ -134,8 +134,7 @@ export class ProductsService {
     if (error.code === '23505') {
       throw new BadRequestException(error.detail);
     }
-    console.log({ error });
-    // this.logger.error({error});
+    this.logger.error({error});
     this.logger.error({ code: error.code, message: error.detail });
     throw new InternalServerErrorException(
       'Unexpected error, check server logs',
